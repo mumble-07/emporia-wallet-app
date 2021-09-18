@@ -28,6 +28,14 @@ jobs:
     - name: Install dependencies
       run: |
         bundle install
+        
+    - name: Run Tests
+      run: bundle exec rspec
+      env:
+        DATABASE_HOST: 127.0.0.1
+        DATABASE_USERNAME: 'postgres'
+        DATABASE_PASSWORD: 'test'
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
     - name: Setup Database
       run: |
@@ -43,10 +51,4 @@ jobs:
     - name: Run Rubocop
       run: bundle exec rubocop
 
-    - name: Run Tests
-      run: bundle exec rspec
-      env:
-        DATABASE_HOST: 127.0.0.1
-        DATABASE_USERNAME: 'postgres'
-        DATABASE_PASSWORD: 'test'
-        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+    
