@@ -55,6 +55,7 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
+  config.require_master_key = true
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
@@ -68,8 +69,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :user_name            => 'emporia.wallet@gmail.com',
-    :password             => 'ealguzuipzvijcur',
+    :user_name            => Rails.application.credentials.gmail_mailer[:username],
+    :password             => Rails.application.credentials.gmail_mailer[:password],
     :authentication       => "plain",
     :enable_starttls_auto => true
   }
