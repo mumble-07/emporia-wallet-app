@@ -1,13 +1,13 @@
 class PortfoliosController < ApplicationController
   before_action :authenticate_user!
-  #before_action :portfolio
+  # before_action :portfolio
   def new
     @markets = Market.all
     @markets = Market.find(params[:market_id])
     @portfolio = Portfolio.new
     @portfolios = Portfolio.all
-    @portfolios = Portfolio.find_by_id(params[:user_id])
-    @portfolios = Portfolio.find_by_id(params[:market_id])
+    @portfolios = Portfolio.find_by(id: params[:user_id])
+    @portfolios = Portfolio.find_by(id: params[:market_id])
   end
 
   def create
