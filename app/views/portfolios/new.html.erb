@@ -1,7 +1,7 @@
 <section class="container-static">
   <section class="card-container">
     <div class="card-header-name">
-      <h1><%=@portfolio%></h1>
+      <h1><%=@markets.market_symbol%></h1>
     </div>
     <div class="card-container-stats">
       <div>
@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="card-container-transaction">
-      <%= form_with url: root_path do |f| %>
+      <%= form_with url: root_path, model: @portfolio, local: true do |f| %>
         <div class="field">
           <%= f.number_field :price, autofocus: true, placeholder: "Price", step: :any %>
           <%= f.number_field :amount, placeholder: "Amount", step: :any %>

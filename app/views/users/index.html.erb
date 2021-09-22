@@ -2,7 +2,7 @@
   <section class="card-container">
     <div class="card-header-name"> 
       <%= current_user.present? ? "" : "" %>
-      <h1>Account Information: <%#= current_user.username %> </h1>
+      <h1>Account Information: <%= current_user.username %> </h1>
     </div>
     <div class="card-container-stats">
       <div>
@@ -41,7 +41,7 @@
         <h5>5%</h5>
         <h5>P 250.00</h5>
         <h5>P 5250.00</h5>
-        <%= link_to "View", new_portfolio_path, class: "link-card-action default" %>
+        <%= link_to "View", new_user_portfolio_path(user_id:current_user, market_id:portfolio.market_id), class: "link-card-action default" %>
       </div>
       <% end %>
             <% end %>
