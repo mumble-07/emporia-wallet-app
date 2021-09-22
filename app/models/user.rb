@@ -1,9 +1,9 @@
 class User < ApplicationRecord
+  has_one :wallet, dependent: :destroy
   has_many :portfolios, dependent: :destroy
+  has_many :history, dependent: :destroy
 
-  # has_many :history, dependent: :destroy
-  # has_one :wallet, dependent: :destroy
-  after_create :send_welcome_email
+  after_create :send_welcome_email, :create_user_wallet
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -25,5 +25,10 @@ class User < ApplicationRecord
 
   def send_welcome_email
     WelcomeMailer.welome_account_email(email).deliver_now
+  end
+
+  def create_user_wallet
+    user_wallet = Wallet.new(user_id: id, balance: 100000)
+    user_wallet.save
   end
 end
