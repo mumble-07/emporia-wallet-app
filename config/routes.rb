@@ -4,17 +4,17 @@ Rails.application.routes.draw do
   devise_for :admins, path: 'admins', skip: [:registrations, :passwords]
   devise_for :users, path: 'users'
   resources :static_pages
-  resources :users
-  resources :portfolios, only: [:new]
-    
+  resources :users do
+    resources :portfolios, only: [:new]
+  end
+  
   # resources :admins #removed resources for admins
 
   root 'static_pages#home_page'
   
   resources :markets, only: [:index]
-  #get '/markets', to: 'static_pages#market_index'
+  resources :histories, only: [:show]
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   
   authenticated :admin do
     #admin specific routes
