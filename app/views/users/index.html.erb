@@ -6,8 +6,12 @@
     </div>
     <div class="card-container-stats">
       <div>
-        <h3><%= user_balance %></h3>
+      <% @wallets.each do |wallet| %>
+      <% if wallet.id == current_user.id %>
+        <h3><%= user_balance(wallet.balance) %></h3>
         <h3>Balance</h3>
+      <% end %>
+      <% end %>
       </div>
       <div>
         <h3>Php 5, 123.00</h3>
@@ -44,7 +48,7 @@
         <%= link_to "View", new_user_portfolio_path(user_id:current_user, market_id:portfolio.market_id), class: "link-card-action default" %>
       </div>
       <% end %>
-            <% end %>
+      <% end %>
     </div>
   </section>
 </section>
