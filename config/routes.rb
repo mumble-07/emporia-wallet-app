@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   devise_for :admins, path: 'admins', skip: [:registrations, :passwords]
   devise_for :users, path: 'users'
   resources :static_pages
-  resources :users do
-    resources :portfolios, only: [:new]
+  resources :users do 
+   # post '/user/portfolios/new', to: 'portfolios#create', as: :new_user_portfolio
+    resources :portfolios, only: [:new, :create]
   end
   
   # resources :admins #removed resources for admins
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   root 'static_pages#home_page'
   
   resources :markets, only: [:index]
-  resources :histories, only: [:show]
+  resources :histories, only: [:index]
 
   
   authenticated :admin do
