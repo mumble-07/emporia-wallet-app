@@ -16,7 +16,7 @@
       <% @wallets.each do |wallet| %>
       <% if wallet.id == current_user.id %>
     <div class="card-container-transaction">
-      <%= form_with model: @portfolio, local: true do |f| %>
+      <%= form_with scope: :portfolio, model: [@portfolio.user, @portfolio], local: true do |f| %>
         <div class="field">
           <%= f.number_field :user_id, value: current_user.id, type: :hidden%>
           <%= f.text_field :market_symbol, value: @markets.market_symbol, type: :hidden  %>
@@ -29,7 +29,7 @@
         </div>
       <% end %>
 
-      <%= form_with model: @portfolio, local: true do |f| %>
+      <%= form_with scope: :portfolio, model: [@portfolio.user, @portfolio], local: true do |f| %>
         <div class="field">
           <%= f.number_field :user_id, value: current_user.id, type: :hidden%>
           <%= f.text_field :market_symbol, value: @markets.market_symbol, type: :hidden  %>
