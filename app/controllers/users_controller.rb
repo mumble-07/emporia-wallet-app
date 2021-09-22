@@ -3,5 +3,6 @@ class UsersController < ApplicationController
     @users = User.all
     @markets = Market.all
     @portfolios = Portfolio.all
+    @wallets = Wallet.all
   end
 end

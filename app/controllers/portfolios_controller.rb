@@ -4,14 +4,17 @@ class PortfoliosController < ApplicationController
   def new
     @markets = Market.all
     @markets = Market.find(params[:market_id])
-    @portfolio = Portfolio.new
+    @wallets = Wallet.all
+    @portfolio = current_user.portfolios.build
     @portfolios = Portfolio.all
     @portfolios = Portfolio.find_by(id: params[:user_id])
     @portfolios = Portfolio.find_by(id: params[:market_id])
+    @buy_value = @markets.curr_price * 50.06 + (@markets.curr_price*50.06*0.05)
+    @sell_value = @markets.curr_price * 50.06 - (@markets.curr_price*50.06*0.05)
   end
 
   def create
-    @portfolio = @markets.portfolios.build(portfolio_params)
+    @portfolio = current_user.portfolios.build(portfolio_params)
     if @portfolio.save
       redirect_to users_path
     else
