@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_many :portfolios, dependent: :destroy
-  has_many :markets, through: :history
+
   # has_many :history, dependent: :destroy
   # has_one :wallet, dependent: :destroy
   after_create :send_welcome_email

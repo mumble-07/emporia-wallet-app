@@ -1,2 +1,3 @@
 class History < ApplicationRecord
+
 end
