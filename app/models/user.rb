@@ -28,7 +28,7 @@ class User < ApplicationRecord
   end
 
   def create_user_wallet
-    user_wallet = Wallet.new(user_id: id, balance: 100000)
+    user_wallet = Wallet.new(user_id: id, balance: 100_000)
     user_wallet.save
   end
 end
