@@ -1,0 +1,2 @@
+module TransactionsLogsHelper
+end

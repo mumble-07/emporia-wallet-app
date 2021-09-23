@@ -5,12 +5,13 @@ Rails.application.routes.draw do
   devise_for :users, path: 'users'
   resources :static_pages
 
-  authenticated :users do
+  authenticated :user do
     resources :portfolios, only: [:new]
     resources :users do 
       resources :portfolios, only: [:new, :create]
     end
     resources :transactions_logs, only: [:index]
+    # get '/users/transaction-logs', to: 'transactions_logs#index' #list view of users
     resources :markets, only: [:index]
     # root 'static_pages#home_page'
   end
@@ -29,6 +30,6 @@ Rails.application.routes.draw do
     #resque FE
     mount Resque::Server.new, at: '/admins/jobs'
   end
-  
+
   root 'static_pages#home_page'
 end

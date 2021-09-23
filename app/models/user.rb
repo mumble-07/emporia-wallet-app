@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_one :wallet, dependent: :destroy
   has_many :portfolios, dependent: :destroy
-  has_many :history, dependent: :destroy
+  has_many :transactions_logs, dependent: :destroy
 
   after_create :send_welcome_email, :create_user_wallet
   # Include default devise modules. Others available are:
