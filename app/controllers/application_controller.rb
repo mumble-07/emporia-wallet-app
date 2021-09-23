@@ -21,6 +21,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def mkt_value_with_interest(type, mkt_current_price)
+    mkt_price_in_peso = mkt_current_price * 50.06
+    mkt_price_in_peso_with_interest = mkt_current_price * 50.06 * 0.05
+    case type
+    when "buy"
+      mkt_price_in_peso + mkt_price_in_peso_with_interest
+    when "sell"
+      mkt_price_in_peso - mkt_price_in_peso_with_interest
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
