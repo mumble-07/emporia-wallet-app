@@ -15,10 +15,14 @@ module ApplicationHelper
     mkt_price_in_peso = mkt_current_price * 50.06
     mkt_price_in_peso_with_interest = mkt_current_price * 50.06 * 0.05
     case type
-    when "buy"
+    when 'buy'
       mkt_price_in_peso + mkt_price_in_peso_with_interest
-    when "sell"
+    when 'sell'
       mkt_price_in_peso - mkt_price_in_peso_with_interest
     end
+  end
+
+  def mkt_value_with_original(mkt_current_price)
+    mkt_price_in_peso = mkt_current_price * 50.06
   end
 end

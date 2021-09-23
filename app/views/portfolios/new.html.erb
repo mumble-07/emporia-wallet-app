@@ -1,5 +1,19 @@
 <section class="container-static">
   <section class="card-container">
+    <div class="card-header-name"> 
+      <h1>Account Information</h1>
+    </div>
+    <div class="card-container-stats">
+      <div>
+        <h3><%= format_to_peso(@wallet.balance) %></h3>
+        <h3>Balance</h3>
+      </div>
+      <div>
+        <h3><%= @current_stock.nil? ? 0.00 : @current_stock.units %></h3>
+        <h3>Stocks</h3>
+      </div>
+    </div>
+
     <div class="card-header-name">
       <h1><%=@market.market_symbol%></h1>
     </div>
