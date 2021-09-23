@@ -8,13 +8,14 @@ Rails.application.routes.draw do
     resources :portfolios, only: [:new, :create]
   end
   
-  # resources :admins #removed resources for admins
-
   root 'static_pages#home_page'
   
   resources :markets, only: [:index]
   resources :histories, only: [:index]
 
+  authenticated :users do
+    # root 'static_pages#home_page'
+  end
   
   authenticated :admin do
     #admin specific routes
