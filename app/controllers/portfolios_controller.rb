@@ -42,9 +42,23 @@ class PortfoliosController < ApplicationController
           else
             redirect_back fallback_location: users_path, danger: 'Kindly double check all information before submitting. Also please check if balance is sufficient.'
           end
-
         end
       when "SELL"
+        if is_market_available.nil? || is_market_available&.units < params[:portfolio][:units].to_f
+          #if there is no market, show error
+          redirect_back fallback_location: users_path, danger: 'Please check if you have enough stock available for this market'
+        else 
+          #if market is available do sell logic
+          @portfolio = is_market_available
+          @portfolio.units = (@portfolio.units - params[:portfolio][:units].to_f) #subtract stocks
+          #balance will be subtracted. sell price is calculated as current units to be sold * current stock price (hist_price variable)
+          @trader_wallet.balance = current_user.wallet.balance + params[:portfolio][:units].to_f * params[:portfolio][:hist_price].to_f
+          @trader_wallet.save
+          #destroy if 0 units left. Save if not
+          @portfolio.units == 0 ?  @portfolio.destroy : @portfolio.save
+          #redirect
+          redirect_to users_path, success: 'Stock successfully sold!'
+        end
     end
 
   end

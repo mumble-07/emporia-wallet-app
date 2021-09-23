@@ -45,10 +45,10 @@
           <div class="field">
             <%= f.number_field :user_id, value: current_user.id, type: :hidden%>
             <%= f.text_field :market_symbol, value: @market.market_symbol, type: :hidden  %>
-            <%= f.number_field :hist_price, autofocus: true, placeholder: "Price", step: :any,  :required => true %>
-            <%#= f.number_field :amount, placeholder: "Amount", step: :any %>
-            <%= f.number_field :market_id, value: @market.id, type: :hidden %>
+            <%= f.number_field :hist_price, value: @sell_value, type: :hidden  %>
+            <%= f.number_field :units, placeholder: "Sell in Unit", step: :any %> 
             <%= f.text_field :transaction_type, value: 'SELL', type: :hidden %>
+            <%= f.number_field :market_id, value: @market.id, type: :hidden %>
           </div>
           <div class="actions">
             <%= f.submit "Sell", class: 'transaction-sell', data: { confirm: "PLEASE CONFIRM SELL" } %>
