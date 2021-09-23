@@ -1,4 +1,8 @@
 class Market < ApplicationRecord
+  validates :market_symbol, presence: true
+  validates :curr_price, presence: true
+  validates :logo_url, presence: true
+
   def self.list_stocks
     client = IEX::Api::Client.new(
       publishable_token: Rails.application.credentials.iex_global_api[:publishable_token],
