@@ -12,55 +12,7 @@ class PortfoliosController < ApplicationController
 
   def create
     is_market_available = current_user.portfolios.find_by(market_symbol: params[:portfolio][:market_symbol])
-    @trader_wallet = current_user.wallet
-    #check transaction type
-    case params[:portfolio][:transaction_type]
-      when "BUY"
-        if is_market_available.nil?
-          #if there is no market, create one
-          @portfolio = current_user.portfolios.build(portfolio_params)
-          @portfolio.units = @portfolio.amount / @portfolio.hist_price
-          @trader_wallet.balance = current_user.wallet.balance - @portfolio.amount
-          @portfolio.save if @trader_wallet.balance > 0
-          if @trader_wallet.balance > 0 && @portfolio.save
-            @trader_wallet.save
-            redirect_to users_path, success: 'Successfully bought stocks'
-          else
-            redirect_back fallback_location: users_path, danger: 'Kindly double check all information before submitting. Also please check if balance is sufficient.'
-          end
-
-        else
-          @portfolio = is_market_available
-          units_to_be_added = params[:portfolio][:amount].to_f / params[:portfolio][:hist_price].to_f
-          @portfolio.units = (@portfolio.units + units_to_be_added)
-          @portfolio.amount = (@portfolio.amount + params[:portfolio][:amount].to_f)
-          @trader_wallet.balance = current_user.wallet.balance - params[:portfolio][:amount].to_f
-          @portfolio.save if @trader_wallet.balance > 0
-          if @trader_wallet.balance > 0 && @portfolio.save
-            @trader_wallet.save
-            redirect_to users_path, success: 'Successfully bought stocks'
-          else
-            redirect_back fallback_location: users_path, danger: 'Kindly double check all information before submitting. Also please check if balance is sufficient.'
-          end
-        end
-      when "SELL"
-        if is_market_available.nil? || is_market_available&.units < params[:portfolio][:units].to_f
-          #if there is no market, show error
-          redirect_back fallback_location: users_path, danger: 'Please check if you have enough stock available for this market'
-        else 
-          #if market is available do sell logic
-          @portfolio = is_market_available
-          @portfolio.units = (@portfolio.units - params[:portfolio][:units].to_f) #subtract stocks
-          #balance will be subtracted. sell price is calculated as current units to be sold * current stock price (hist_price variable)
-          @trader_wallet.balance = current_user.wallet.balance + params[:portfolio][:units].to_f * params[:portfolio][:hist_price].to_f
-          @trader_wallet.save
-          #destroy if 0 units left. Save if not
-          @portfolio.units == 0 ?  @portfolio.destroy : @portfolio.save
-          #redirect
-          redirect_to users_path, success: 'Stock successfully sold!'
-        end
-    end
-
+    portfolio_transaction_logic(is_market_available)
   end
 
   private
@@ -71,5 +23,72 @@ class PortfoliosController < ApplicationController
 
   def convert_to_units(invested, stock_price)
     invested / stock_price
+  end
+
+  def portfolio_transaction_logic(is_market_available)
+    @trader_wallet = current_user.wallet
+    case params[:portfolio][:transaction_type]
+    when 'BUY'
+      portfolio_buy_logic(is_market_available)
+    when 'SELL'
+      portfolio_sell_logic(is_market_available)
+    end
+  end
+
+  def portfolio_buy_logic(is_market_available)
+    if is_market_available.nil?
+      # if there is no market, create one
+      @portfolio = current_user.portfolios.build(portfolio_params)
+      @portfolio.units = @portfolio.amount / @portfolio.hist_price
+      @trader_wallet.balance = current_user.wallet.balance - @portfolio.amount
+      @portfolio.save if @trader_wallet.balance.positive?
+      portfolio_buy_logic_update(@trader_wallet, @portfolio)
+    else
+      @portfolio = is_market_available
+      amount = params[:portfolio][:amount].to_f
+      stock_price = params[:portfolio][:hist_price].to_f
+      units_to_be_added = amount / stock_price
+      @portfolio.units = (@portfolio.units + units_to_be_added)
+      @portfolio.amount = (@portfolio.amount + params[:portfolio][:amount].to_f)
+      @trader_wallet.balance = current_user.wallet.balance - params[:portfolio][:amount].to_f
+      @portfolio.save if @trader_wallet.balance.positive?
+      portfolio_buy_logic_create(@trader_wallet, @portfolio)
+    end
+  end
+
+  def portfolio_buy_logic_update(trader_wallet, portfolio)
+    if trader_wallet.balance.positive? && portfolio.save
+      trader_wallet.save
+      redirect_to users_path, success: 'Successfully bought stocks'
+    else
+      redirect_back fallback_location: users_path, danger: 'Kindly double check all information before submitting. Also please check if balance is sufficient.'
+    end
+  end
+
+  def portfolio_buy_logic_create(trader_wallet, portfolio)
+    if trader_wallet.balance.positive? && portfolio.save
+      trader_wallet.save
+      redirect_to users_path, success: 'Successfully bought stocks'
+    else
+      redirect_back fallback_location: users_path, danger: 'Kindly double check all information before submitting. Also please check if balance is sufficient.'
+    end
+  end
+
+  def portfolio_sell_logic(is_market_available)
+    if is_market_available.nil? || is_market_available.units < params[:portfolio][:units].to_f
+      # if there is no market, show error
+      redirect_back fallback_location: users_path, danger: 'Please check if you have enough stock available for this market'
+    else
+      # if market is available do sell logic
+      @portfolio = is_market_available
+      @portfolio.units = (@portfolio.units - params[:portfolio][:units].to_f) # subtract stocks
+      # balance will be subtracted. sell price is calculated as current units to be sold * current stock price (hist_price variable)
+      @trader_wallet.balance = current_user.wallet.balance + params[:portfolio][:units].to_f * params[:portfolio][:hist_price].to_f
+      @trader_wallet.save
+      # destroy if 0 units left. Save if not
+      @portfolio.units.zero? ? @portfolio.destroy : @portfolio.save
+      # redirect
+      redirect_to users_path, success: 'Stock successfully sold!'
+    end
   end
 end

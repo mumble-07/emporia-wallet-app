@@ -12,8 +12,7 @@ module UsersHelper
     profit_or_loss_gross_val = market.units * current_stock_price
     profit_or_loss_peso = market.amount - profit_or_loss_gross_val
     profit_or_loss_pct = ((market.amount - profit_or_loss_gross_val) / market.amount)
-    
-    
+
     { profit_or_loss_pct: profit_or_loss_pct, profit_or_loss_peso: profit_or_loss_peso, profit_or_loss_gross_val: profit_or_loss_gross_val } # return a hash
   end
 end
