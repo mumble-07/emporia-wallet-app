@@ -12,6 +12,7 @@ class PortfoliosController < ApplicationController
 
   def create
     is_market_available = current_user.portfolios.find_by(market_symbol: params[:portfolio][:market_symbol])
+    @trader_wallet = current_user.wallet
     #check transaction type
     case params[:portfolio][:transaction_type]
       when "BUY"
@@ -19,11 +20,13 @@ class PortfoliosController < ApplicationController
           #if there is no market, create one
           @portfolio = current_user.portfolios.build(portfolio_params)
           @portfolio.units = @portfolio.amount / @portfolio.hist_price
-
-          if @portfolio.save
-            redirect_to users_path
+          @trader_wallet.balance = current_user.wallet.balance - @portfolio.amount
+          @portfolio.save if @trader_wallet.balance > 0
+          if @trader_wallet.balance > 0 && @portfolio.save
+            @trader_wallet.save
+            redirect_to users_path, success: 'Successfully bought stocks'
           else
-            render :new
+            redirect_back fallback_location: users_path, danger: 'Kindly double check all information before submitting. Also please check if balance is sufficient.'
           end
 
         else
@@ -31,11 +34,13 @@ class PortfoliosController < ApplicationController
           units_to_be_added = params[:portfolio][:amount].to_f / params[:portfolio][:hist_price].to_f
           @portfolio.units = (@portfolio.units + units_to_be_added)
           @portfolio.amount = (@portfolio.amount + params[:portfolio][:amount].to_f)
-          @portfolio.save
-          if @portfolio.save
-            redirect_to users_path
+          @trader_wallet.balance = current_user.wallet.balance - params[:portfolio][:amount].to_f
+          @portfolio.save if @trader_wallet.balance > 0
+          if @trader_wallet.balance > 0 && @portfolio.save
+            @trader_wallet.save
+            redirect_to users_path, success: 'Successfully bought stocks'
           else
-            render :new
+            redirect_back fallback_location: users_path, danger: 'Kindly double check all information before submitting. Also please check if balance is sufficient.'
           end
 
         end
