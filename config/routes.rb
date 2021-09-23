@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   devise_for :admins, path: 'admins', skip: [:registrations, :passwords]
   devise_for :users, path: 'users'
   resources :static_pages
-  resources :users
   resources :portfolios, only: [:new]
+   resources :users do 
+    resources :portfolios, only: [:new, :create]
+  end
     
   # resources :admins #removed resources for admins
 

@@ -1,9 +1,7 @@
 class Portfolio < ApplicationRecord
   belongs_to :user
 
-  def new
-    @portfolio = @sample_stock.portfolios.build
-    @sample_stocks = SampleStock.all
-    @use_id = params[:user_id]
-  end
+  validates :user_id, presence: true
+  validates :market_symbol, presence: true
+  validates :hist_price, presence: true
 end

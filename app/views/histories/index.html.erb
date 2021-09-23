@@ -1,0 +1,30 @@
+<section class="container-static">
+  <section class="card-container">
+    <div class="card-header-name">
+      <h1> Transaction Logs</h1>
+    </div>
+  
+    <div class="card-container-table">
+      <%# data headers %>
+      <% if @histories.empty? %>
+      <h1>No Transaction histories yet</h1>
+      <% else %>
+      <div class="card-item headers market">
+        <h5 class="default">Market</h5>
+        <h5 class="default">Type</h5>
+        <h5>Amount/Units</h5>
+        <h5>Date</h5>
+      </div>
+
+    <% @histories.each do |history| %>
+      <div class="card-item market">
+      <h5 class="default"><%= history.market_symbol %></h5>
+      <h5 class="default"> -0.17%</h5>
+      <h5></h5>
+      <h5></h5>
+      </div>
+    <% end %>
+    <% end %>
+    </div>
+  </section>
+</section>
