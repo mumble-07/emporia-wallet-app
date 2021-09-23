@@ -20,7 +20,7 @@
         <div class="field">
           <%= f.number_field :user_id, value: current_user.id, type: :hidden%>
           <%= f.text_field :market_symbol, value: @markets.market_symbol, type: :hidden  %>
-          <%= f.number_field :price, autofocus: true, placeholder: "Price", step: :any, max: wallet.balance %>
+          <%= f.number_field :hist_price, autofocus: true, placeholder: "Price", step: :any, max: wallet.balance %>
           <%#= f.number_field :amount, placeholder: "Amount", step: :any %>
           <%= f.number_field :market_id, value: @markets.id, type: :hidden %>
         </div>
@@ -33,7 +33,7 @@
         <div class="field">
           <%= f.number_field :user_id, value: current_user.id, type: :hidden%>
           <%= f.text_field :market_symbol, value: @markets.market_symbol, type: :hidden  %>
-          <%= f.number_field :price, autofocus: true, placeholder: "Price", step: :any %>
+          <%= f.number_field :hitst_price, autofocus: true, placeholder: "Price", step: :any %>
           <%#= f.number_field :amount, placeholder: "Amount", step: :any %>
           <%= f.number_field :market_id, value: @markets.id, type: :hidden %>
         </div>
