@@ -3,7 +3,7 @@ class WelcomeMailer < ApplicationMailer
     mail(to: email, subject: 'Welome to Emporia Wallet!')
   end
 
-  def welome_account_email_admin(email)
+  def welcome_account_email_admin(email)
     mail(to: email, subject: 'Welome to Emporia Wallet!')
   end
 end

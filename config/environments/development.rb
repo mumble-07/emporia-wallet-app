@@ -57,7 +57,7 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   #enable master key for mailer config
-  # config.require_master_key = true
+  config.require_master_key = true
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
@@ -69,13 +69,13 @@ Rails.application.configure do
 
   # uncomment to test
   # SMTP settings for gmail
-  # config.action_mailer.smtp_settings = {
-  #   :address              => "smtp.gmail.com",
-  #   :port                 => 587,
-  #   :user_name            => Rails.application.credentials.config[:gmail_mailer][:username],
-  #   :password             => Rails.application.credentials.config[:gmail_mailer][:password],
-  #   :authentication       => "plain",
-  #   :enable_starttls_auto => true
-  # }
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => Rails.application.credentials.config[:gmail_mailer][:username],
+    :password             => Rails.application.credentials.config[:gmail_mailer][:password],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
 end
 

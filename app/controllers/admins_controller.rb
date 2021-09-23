@@ -29,7 +29,8 @@ class AdminsController < ApplicationController
   end
 
   def create_user
-    @trader = User.new(params.require(:user).permit(:email, :password, :confirm_password, :full_name, :username))
+    @trader = User.new(params.require(:user).permit(:email, :password, :full_name, :username))
+    @trader.approved = true
     @trader.save
     if @trader.save
       WelcomeMailer.welome_account_email(@trader.email).deliver_now
