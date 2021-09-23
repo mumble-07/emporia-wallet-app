@@ -9,13 +9,16 @@ Rails.application.routes.draw do
     
   # resources :admins #removed resources for admins
 
-  root 'static_pages#home_page'
+ 
   
   resources :markets, only: [:index]
   #get '/markets', to: 'static_pages#market_index'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  
+  authenticated :users do
+    # root 'static_pages#home_page'
+  end
+
   authenticated :admin do
     #admin specific routes
     get '/admins/trader-settings', to: 'admins#trader_settings' #list view of users
@@ -30,4 +33,5 @@ Rails.application.routes.draw do
     #resque FE
     mount Resque::Server.new, at: '/admins/jobs'
   end
+  root 'static_pages#home_page'
 end
