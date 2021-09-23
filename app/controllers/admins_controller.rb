@@ -29,10 +29,10 @@ class AdminsController < ApplicationController
   end
 
   def create_user
-    @trader = User.new(params.require(:user).permit(:email, :password, :confirm_password, :full_name, :username))
+    @trader = User.new(params.require(:user).permit(:email, :password, :full_name, :username))
+    @trader.approved = true
     @trader.save
     if @trader.save
-      WelcomeMailer.welome_account_email(@trader.email).deliver_now
       redirect_back fallback_location: admins_add_user_path, success: 'Successfully created a trader'
     else
       redirect_back fallback_location: admins_add_user_path, danger: 'Kindly double check all information before submitting'

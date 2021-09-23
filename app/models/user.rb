@@ -21,6 +21,7 @@ class User < ApplicationRecord
   private
 
   def send_welcome_email
-    WelcomeMailer.welome_account_email(email).deliver_now
+    WelcomeMailer.welome_account_email(email).deliver_now if approved == false
+    WelcomeMailer.welcome_account_email_admin(email).deliver_now if approved == true
   end
 end
