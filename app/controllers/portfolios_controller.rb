@@ -9,8 +9,8 @@ class PortfoliosController < ApplicationController
     @portfolios = Portfolio.all
     @portfolios = Portfolio.find_by(id: params[:user_id])
     @portfolios = Portfolio.find_by(id: params[:market_id])
-    @buy_value = @markets.curr_price * 50.06 + (@markets.curr_price*50.06*0.05)
-    @sell_value = @markets.curr_price * 50.06 - (@markets.curr_price*50.06*0.05)
+    @buy_value = @markets.curr_price * 50.06 + (@markets.curr_price * 50.06 * 0.05)
+    @sell_value = @markets.curr_price * 50.06 - (@markets.curr_price * 50.06 * 0.05)
   end
 
   def create
