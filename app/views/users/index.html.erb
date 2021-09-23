@@ -32,22 +32,23 @@
         <h5>P/L (%)</h5>
         <h5>P/L (Php)</h5>
         <h5>Value</h5>
+        <h5>Type</h5>
         <h5 class="default">Action</h5>
       </div>
 
       <%# loop all data here %>
-       <% @portfolios.each do |portfolio| %>
-       <% if portfolio.user == current_user %>
+      <%# @markets.each do |market| %>
+        <% @portfolios.each do |portfolio| %>
       <div class="card-item">
         <h5 class="default"><%= portfolio.market_symbol %></h5>
-        <h5 class="default">0.000123</h5>
-        <h5>P 5,000.00</h5>
-        <h5>5%</h5>
-        <h5>P 250.00</h5>
-        <h5>P 5250.00</h5>
+        <h5 class="default"><%= units_stock(portfolio.hist_price, get_curr_stock_price(portfolio.market_symbol))%></h5>
+        <h5><%= invested_value(portfolio.hist_price)%></h5>
+        <h5><%= percent_lg(get_curr_stock_price(portfolio.market_symbol), portfolio.hist_price)%></h5>
+        <h5><%= get_val_invest_diff(portfolio.hist_price, get_curr_stock_price(portfolio.market_symbol))%></h5>
+        <h5><%= current_value(get_curr_stock_price(portfolio.market_symbol))%></h5>
+        <h5><%= portfolio.transaction_type%></h5>
         <%= link_to "View", new_user_portfolio_path(user_id:current_user, market_id:portfolio.market_id), class: "link-card-action default" %>
       </div>
-      <% end %>
       <% end %>
     </div>
   </section>
