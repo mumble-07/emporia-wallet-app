@@ -4,19 +4,23 @@ Rails.application.routes.draw do
   devise_for :admins, path: 'admins', skip: [:registrations, :passwords]
   devise_for :users, path: 'users'
   resources :static_pages
-  resources :users do 
+  resources :portfolios, only: [:new]
+   resources :users do 
     resources :portfolios, only: [:new, :create]
   end
-  
-  root 'static_pages#home_page'
+    
+  # resources :admins #removed resources for admins
+
+ 
   
   resources :markets, only: [:index]
-  resources :histories, only: [:index]
+  #get '/markets', to: 'static_pages#market_index'
 
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   authenticated :users do
     # root 'static_pages#home_page'
   end
-  
+
   authenticated :admin do
     #admin specific routes
     get '/admins/trader-settings', to: 'admins#trader_settings' #list view of users
@@ -31,4 +35,5 @@ Rails.application.routes.draw do
     #resque FE
     mount Resque::Server.new, at: '/admins/jobs'
   end
+  root 'static_pages#home_page'
 end
