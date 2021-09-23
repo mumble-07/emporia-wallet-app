@@ -5,12 +5,15 @@ class PortfoliosController < ApplicationController
     @markets = Market.all
     @markets = Market.find(params[:market_id])
     @wallets = Wallet.all
+
     @portfolio = current_user.portfolios.build
-    @portfolios = Portfolio.all
     @portfolios = Portfolio.find_by(id: params[:user_id])
     @portfolios = Portfolio.find_by(id: params[:market_id])
-    @buy_value = @markets.curr_price * 50.06 + (@markets.curr_price*50.06*0.05)
-    @sell_value = @markets.curr_price * 50.06 - (@markets.curr_price*50.06*0.05)
+
+    @histories = History.new
+    @histories = History.where(user_id: current_user)
+    @buy_value = @markets.curr_price * 50.06 + (@markets.curr_price * 50.06 * 0.05)
+    @sell_value = @markets.curr_price * 50.06 - (@markets.curr_price * 50.06 * 0.05)
   end
 
   def create
@@ -25,14 +28,6 @@ class PortfoliosController < ApplicationController
   private
 
   def portfolio_params
-    params.require(:portfolio).permit(:user_id, :market_symbol, :hist_price, :amount, :market_id)
+    params.require(:portfolio).permit(:user_id, :market_symbol, :hist_price, :amount, :market_id, :transaction_type)
   end
-
-  # def portfolio
-  #   @portfolio = Portfolio.find(params[:user_id])
-  # end
-
-  # def user
-  #   @user = User.find(params[:user_id])
-  # end
 end
