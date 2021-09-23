@@ -2,7 +2,7 @@
   <section class="card-container">
     <div class="card-header-name"> 
       <%= current_user.present? ? "" : "" %>
-      <h1>Account Information: <%= current_user.username %> </h1>
+      <h1>Account Information: <%= current_user.username %></h1>
     </div>
     <div class="card-container-stats">
       <div>
@@ -43,8 +43,8 @@
         <h5 class="default"><%= portfolio.market_symbol %></h5>
         <h5 class="default"><%= units_stock(portfolio.hist_price, get_curr_stock_price(portfolio.market_symbol))%></h5>
         <h5><%= invested_value(portfolio.hist_price)%></h5>
-        <h5><%= percent_lg(get_curr_stock_price(portfolio.market_symbol), portfolio.hist_price)%></h5>
-        <h5><%= get_val_invest_diff(portfolio.hist_price, get_curr_stock_price(portfolio.market_symbol))%></h5>
+        <h5>5%</h5>
+        <h5>PHP 3, 000</h5>
         <h5><%= current_value(get_curr_stock_price(portfolio.market_symbol))%></h5>
         <h5><%= portfolio.transaction_type%></h5>
         <%= link_to "View", new_user_portfolio_path(user_id:current_user, market_id:portfolio.market_id), class: "link-card-action default" %>
