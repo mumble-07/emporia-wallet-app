@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   devise_for :users, path: 'users'
   resources :static_pages
   resources :users do 
-   # post '/user/portfolios/new', to: 'portfolios#create', as: :new_user_portfolio
     resources :portfolios, only: [:new, :create]
   end
   
