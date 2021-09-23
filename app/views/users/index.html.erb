@@ -7,7 +7,7 @@
     <div class="card-container-stats">
       <div>
       <% @wallets.each do |wallet| %>
-      <% if wallet.id == current_user.id %>
+      <% if wallet.user_id == current_user.id %>
         <h3><%= user_balance(wallet.balance) %></h3>
         <h3>Balance</h3>
       <% end %>
@@ -25,7 +25,7 @@
     
     <div class="card-container-table">
       <%# data headers %>
-      <div class="card-item headers">
+      <div class="card-item user headers">
         <h5 class="default">Market</h5>
         <h5 class="default">Units</h5>
         <h5>Invested</h5>
@@ -39,7 +39,7 @@
       <%# loop all data here %>
       <%# @markets.each do |market| %>
         <% @portfolios.each do |portfolio| %>
-      <div class="card-item">
+      <div class="card-item user">
         <h5 class="default"><%= portfolio.market_symbol %></h5>
         <h5 class="default"><%= units_stock(portfolio.hist_price, get_curr_stock_price(portfolio.market_symbol))%></h5>
         <h5><%= invested_value(portfolio.hist_price)%></h5>

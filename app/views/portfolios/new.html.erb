@@ -5,46 +5,42 @@
     </div>
     <div class="card-container-stats">
       <div>
-        <h1><%= current_price(@markets.curr_price, true) %></h1>
+        <h1><%= number_to_currency(@buy_value, unit: 'PHP ') %></h1>
         <h5>Buy</h5>
       </div>
       <div>
-        <h1><%= current_price(@markets.curr_price, false) %></h1>
+        <h1><%= number_to_currency(@sell_value, unit: 'PHP ') %></h1>
         <h5>Sell</h5>
       </div>
     </div>
-      <% @wallets.each do |wallet| %>
-      <% if wallet.id == current_user.id %>
-    <div class="card-container-transaction">
-      <%= form_with scope: :portfolio, model: [@portfolio.user, @portfolio], local: true do |f| %>
-        <div class="field">
-          <%= f.number_field :user_id, value: current_user.id, type: :hidden%>
-          <%= f.text_field :market_symbol, value: @markets.market_symbol, type: :hidden  %>
-          <%= f.number_field :hist_price, autofocus: true, placeholder: "Price", step: :any, min: 0.1, max: wallet.balance, :required => true %>
-          <%#= f.number_field :amount, placeholder: "Amount", step: :any %>
-          <%= f.text_field :transaction_type, value: 'BUY', type: :hidden %>
-          <%= f.number_field :market_id, value: @markets.id, type: :hidden %>
-        </div>
-        <div class="actions">
-          <%= f.submit "Buy", class: 'transaction-buy', data: { confirm: "PLEASE CONFIRM BUY" } %>
-        </div>
-      <% end %>
+      <div class="card-container-transaction">
+        <%= form_with scope: :portfolio, model: [@portfolio.user, @portfolio], local: true do |f| %>
+          <div class="field">
+            <%= f.number_field :user_id, value: current_user.id, type: :hidden%>
+            <%= f.text_field :market_symbol, value: @markets.market_symbol, type: :hidden  %>
+            <%= f.number_field :hist_price, autofocus: true, placeholder: "Price", step: :any, min: 0.1, max: @wallet.balance, :required => true %>
+            <%#= f.number_field :amount, placeholder: "Amount", step: :any %>
+            <%= f.text_field :transaction_type, value: 'BUY', type: :hidden %>
+            <%= f.number_field :market_id, value: @markets.id, type: :hidden %>
+          </div>
+          <div class="actions">
+            <%= f.submit "Buy", class: 'transaction-buy', data: { confirm: "PLEASE CONFIRM BUY" } %>
+          </div>
+        <% end %>
 
-      <%= form_with scope: :portfolio, model: [@portfolio.user, @portfolio], local: true do |f| %>
-        <div class="field">
-          <%= f.number_field :user_id, value: current_user.id, type: :hidden%>
-          <%= f.text_field :market_symbol, value: @markets.market_symbol, type: :hidden  %>
-          <%= f.number_field :hitst_price, autofocus: true, placeholder: "Price", step: :any, min: 0.1, :required => true %>
-          <%#= f.number_field :amount, placeholder: "Amount", step: :any %>
-          <%= f.number_field :market_id, value: @markets.id, type: :hidden %>
-          <%= f.text_field :transaction_type, value: 'SELL', type: :hidden %>
-        </div>
-        <div class="actions">
-          <%= f.submit "Sell", class: 'transaction-sell', data: { confirm: "PLEASE CONFIRM SELL" } %>
-        </div>
-      <% end %>
-    </div>
-      <% end %>
-      <% end %>
+        <%= form_with scope: :portfolio, model: [@portfolio.user, @portfolio], local: true do |f| %>
+          <div class="field">
+            <%= f.number_field :user_id, value: current_user.id, type: :hidden%>
+            <%= f.text_field :market_symbol, value: @markets.market_symbol, type: :hidden  %>
+            <%= f.number_field :hitst_price, autofocus: true, placeholder: "Price", step: :any, min: 0.1, :required => true %>
+            <%#= f.number_field :amount, placeholder: "Amount", step: :any %>
+            <%= f.number_field :market_id, value: @markets.id, type: :hidden %>
+            <%= f.text_field :transaction_type, value: 'SELL', type: :hidden %>
+          </div>
+          <div class="actions">
+            <%= f.submit "Sell", class: 'transaction-sell', data: { confirm: "PLEASE CONFIRM SELL" } %>
+          </div>
+        <% end %>
+      </div>
   </section>
 </section>

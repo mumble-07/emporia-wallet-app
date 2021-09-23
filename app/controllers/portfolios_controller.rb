@@ -2,18 +2,11 @@ class PortfoliosController < ApplicationController
   before_action :authenticate_user!
   # before_action :portfolio
   def new
-    @markets = Market.all
     @markets = Market.find(params[:market_id])
-    @wallets = Wallet.all
-
+    @wallet = current_user.wallet
     @portfolio = current_user.portfolios.build
-    @portfolios = Portfolio.find_by(id: params[:user_id])
-    @portfolios = Portfolio.find_by(id: params[:market_id])
-
-    @histories = History.new
-    @histories = History.where(user_id: current_user)
-    @buy_value = @markets.curr_price * 50.06 + (@markets.curr_price * 50.06 * 0.05)
-    @sell_value = @markets.curr_price * 50.06 - (@markets.curr_price * 50.06 * 0.05)
+    @buy_value = mkt_value_with_interest("buy", @markets.curr_price)
+    @sell_value = mkt_value_with_interest("sell", @markets.curr_price)
   end
 
   def create
@@ -30,4 +23,16 @@ class PortfoliosController < ApplicationController
   def portfolio_params
     params.require(:portfolio).permit(:user_id, :market_symbol, :hist_price, :amount, :market_id, :transaction_type)
   end
+
+  def mkt_value_with_interest(type, mkt_current_price)
+    mkt_price_in_peso = mkt_current_price * 50.06
+    mkt_price_in_peso_with_interest = mkt_current_price * 50.06 * 0.05
+    case type
+    when "buy"
+      mkt_price_in_peso + mkt_price_in_peso_with_interest
+    when "sell"
+      mkt_price_in_peso - mkt_price_in_peso_with_interest
+    end
+  end
+
 end

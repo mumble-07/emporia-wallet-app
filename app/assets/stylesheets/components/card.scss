@@ -196,6 +196,27 @@
       }
     }
     //end of sample card-item table template for diff col #
+    &.user{
+      >*{
+        padding: 1rem 0;
+        flex-grow: 1;
+        min-width: 11%; //% depends on initial # of cols
+        max-width: 12%; //% depends on initial # of cols
+        line-height: 100%;
+        text-overflow: ellipsis;
+      }
+      @media only screen and (max-width: 650px) {
+        @include flex-row-start();
+        justify-content: flex-start;
+        >*{
+          flex-grow: 1;
+          min-width: 33%;
+        }
+        >*:not(.default){
+          display: none;
+        }
+      }
+    }
   }
 
   @media only screen and (max-width: 500px) {
