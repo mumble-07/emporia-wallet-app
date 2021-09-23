@@ -19,7 +19,7 @@
             <%= f.number_field :user_id, value: current_user.id, type: :hidden%>
             <%= f.text_field :market_symbol, value: @market.market_symbol, type: :hidden  %>
             <%= f.number_field :amount, autofocus: true, placeholder: "Price", step: :any, min: 0.1, max: @wallet.balance, :required => true %>
-            <%= f.number_field :hist_price, value: @market.curr_price, type: :hidden  %>
+            <%= f.number_field :hist_price, value: @buy_value, type: :hidden  %>
             <%= f.text_field :transaction_type, value: 'BUY', type: :hidden %>
             <%= f.number_field :market_id, value: @market.id, type: :hidden %>
           </div>

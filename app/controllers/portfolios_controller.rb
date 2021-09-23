@@ -5,8 +5,8 @@ class PortfoliosController < ApplicationController
     @market = Market.find(params[:market_id])
     @wallet = current_user.wallet
     @portfolio = current_user.portfolios.build
-    @buy_value = mkt_value_with_interest("buy", @market.curr_price)
-    @sell_value = mkt_value_with_interest("sell", @market.curr_price)
+    @buy_value = helpers.mkt_value_with_interest("buy", @market.curr_price)
+    @sell_value = helpers.mkt_value_with_interest("sell", @market.curr_price)
   end
 
   def create

@@ -6,12 +6,8 @@
     </div>
     <div class="card-container-stats">
       <div>
-      <% @wallets.each do |wallet| %>
-      <% if wallet.user_id == current_user.id %>
-        <h3><%= user_balance(wallet.balance) %></h3>
+        <h3><%= format_to_peso(@wallet.balance) %></h3>
         <h3>Balance</h3>
-      <% end %>
-      <% end %>
       </div>
       <div>
         <h3>Php 5, 123.00</h3>
@@ -26,27 +22,25 @@
     <div class="card-container-table">
       <%# data headers %>
       <div class="card-item user headers">
+        <h5>Type</h5>
         <h5 class="default">Market</h5>
         <h5 class="default">Units</h5>
         <h5>Invested</h5>
         <h5>P/L (%)</h5>
         <h5>P/L (Php)</h5>
-        <h5>Value</h5>
-        <h5>Type</h5>
+        <h5>Total</h5>
         <h5 class="default">Action</h5>
       </div>
 
-      <%# loop all data here %>
-      <%# @markets.each do |market| %>
-        <% @portfolios.each do |portfolio| %>
+      <% @portfolios.each do |portfolio| %>
       <div class="card-item user">
-        <h5 class="default"><%= portfolio.market_symbol %></h5>
-        <h5 class="default"><%= units_stock(portfolio.hist_price, get_curr_stock_price(portfolio.market_symbol))%></h5>
-        <h5><%= invested_value(portfolio.hist_price)%></h5>
-        <h5>5%</h5>
-        <h5>PHP 3, 000</h5>
-        <h5><%= current_value(get_curr_stock_price(portfolio.market_symbol))%></h5>
         <h5><%= portfolio.transaction_type%></h5>
+        <h5 class="default"><%= portfolio.market_symbol %></h5>
+        <h5 class="default"><%= portfolio.units %></h5>
+        <h5><%= format_to_peso(portfolio.amount)%></h5>
+        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_pct] %></h5>
+        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_pct] %></h5>
+        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_gross_val] %></h5>
         <%= link_to "View", new_user_portfolio_path(user_id:current_user, market_id:portfolio.market_id), class: "link-card-action default" %>
       </div>
       <% end %>
