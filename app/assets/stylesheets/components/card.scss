@@ -11,6 +11,27 @@
 .card-header-name{
   width: 80%;
   @include flex-row-space-between();
+  &.market-show{
+    justify-content: flex-start;
+    >img{
+      min-width: 8rem;
+      min-height: 8rem;
+      position: relative;
+    }
+    img:before {
+      content: ' ';
+      display: block;
+      position: absolute;
+      height: 8rem;
+      width: 8rem;
+      background-color: white;
+      background-image: url(broken-image.png);
+      background-size: contain;
+    }
+    >*:last-child{
+      margin-left: 2rem;
+    }
+  }
   // justify-content: flex-start;
   margin-bottom: 2rem;
   >h1{
@@ -175,6 +196,26 @@
     // card item style for stock market (different # of cols)
     // can copy paste style below for other card-items with diff col #
     &.market{
+      >.market-logo{
+        @include flex-col();
+        
+        >img{
+          min-width: 8rem;
+          min-height: 8rem;
+          position: relative;
+        }
+        img:before {
+          content: ' ';
+          display: block;
+          position: absolute;
+          height: 8rem;
+          width: 8rem;
+          background-color: white;
+          background-image: url(broken-image.png);
+          background-size: contain;
+      }
+      }
+      
       >*{
         padding: 1rem 0;
         flex-grow: 1;
@@ -188,7 +229,7 @@
         justify-content: flex-start;
         >*{
           flex-grow: 1;
-          min-width: 33%;
+          min-width: 53%;
         }
         >*:not(.default){
           display: none;
