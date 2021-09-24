@@ -33,4 +33,5 @@ Rails.application.routes.draw do
   end
 
   root 'static_pages#home_page'
+  get "*path" => 'static_pages#error404'
 end
