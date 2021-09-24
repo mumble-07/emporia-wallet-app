@@ -5,7 +5,6 @@ module SeedsServices
       User.destroy_all # destroy all user data first
       Wallet.destroy_all
       Portfolio.destroy_all
-      History.destroy_all
       @logger.info 'Deleted all data from User model'
       user_count = 0
       30.times do
