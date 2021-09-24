@@ -1,37 +1,26 @@
 module UsersHelper
-  def user_balance(bal)
-    number_to_currency(bal, unit: 'PHP ')
-  end
-
-  def units_stock(invested, buy_value)
-    invested ||= 0
-    usd_to_php = 50.06
-    convert_price = usd_to_php * buy_value
-    with_interest_total = convert_price * 1.05
-    num_stock = invested / with_interest_total
-    number_with_precision(num_stock, precision: 5)
-  end
-
-  def invested_value(invested)
-    number_to_currency(invested, unit: 'PHP ')
-  end
-
-  def percent_lg(curr_price, invested)
-    # will finish sell first
-  end
-
-  def current_value(curr_price)
-    usd_to_php = 50.06
-    convert_price = curr_price * usd_to_php
-    with_interest_total = convert_price * 1.05
-    number_to_currency(with_interest_total, unit: 'PHP ')
-  end
-
   def get_curr_stock_price(market_symbol)
     Market.find_by(market_symbol: market_symbol).curr_price
   end
 
-  def get_val_invest_diff(invest, curr_price)
-    # will finish sell first
+  def get_profit_or_loss(market)
+    # to get p/l, we have to first have the following
+    # - stock price it was bought
+    # - current stock price as of the moment
+    # - then calculate the difference using the units and the prices (historical and current)
+    current_stock_price = mkt_value_with_original(get_curr_stock_price(market.market_symbol)) # curr stock price will be the original price (-5% charge)
+    profit_or_loss_gross_val = market.units * current_stock_price
+    profit_or_loss_peso = profit_or_loss_gross_val - market.amount
+    profit_or_loss_pct = ((profit_or_loss_gross_val - market.amount) / market.amount)
+
+    { profit_or_loss_pct: profit_or_loss_pct, profit_or_loss_peso: profit_or_loss_peso, profit_or_loss_gross_val: profit_or_loss_gross_val } # return a hash
+  end
+
+  def get_total_profit_loss(portfolios)
+    total_profit = 0
+    portfolios.each do |portfolio|
+      total_profit += get_profit_or_loss(portfolio)[:profit_or_loss_peso]
+    end
+    total_profit.round(3)
   end
 end

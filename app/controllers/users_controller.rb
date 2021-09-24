@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
-    @markets = Market.all
     @portfolios = current_user.portfolios
-    @wallets = Wallet.all
+    @wallet = current_user.wallet
   end
+
+  def show; end
 end
