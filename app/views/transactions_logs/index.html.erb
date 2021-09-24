@@ -5,18 +5,22 @@
     </div>
   
     <div class="card-container-table">
+      <% if @transactions.empty? %>
+      <h1>No Transactions yet</h1>
+      <% else %>
       <%# data headers %>
       <div class="card-item headers logs">
         <h5 class="default">Date</h5>
         <h5 class="default">Transaction Message</h5>
       </div>
 
-    <% 10.times do %>
+      <% @transactions.each do |transaction| %>
       <div class="card-item logs">
-      <h5 class="default">June 32, 1231</h5>
-      <h5 class="default">Hello World 1 123kljlkj 1l2k3jl1k2j3 l1k2j3 l1k2j3l12k 3j1lk23jl12 k3j1l2k jl</h5>
+      <h5 class="default"><%= transaction.transaction_date %></h5>
+      <h5 class="default"><%= transaction_logs_parser(transaction) %></h5>
       </div>
-    <% end %>
+      <% end %>
+      <% end %>
     </div>
   </section>
 </section>

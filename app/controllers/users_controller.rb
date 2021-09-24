@@ -3,7 +3,6 @@ class UsersController < ApplicationController
     @portfolios = current_user.portfolios
     @wallet = current_user.wallet
   end
-  def show
-    
-  end
+
+  def show; end
 end
