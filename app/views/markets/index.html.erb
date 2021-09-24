@@ -16,7 +16,7 @@
 
   <% @markets.each do |stocks| %>
       <div class="card-item market">
-      <h5 class="default"><%= stocks.market_symbol %></h5>
+      <img class="default" src=<%= stocks.logo_url %>></img>
       <h5 class="default"> -0.17%</h5>
       <h5><%= calculate_price(stocks.curr_price, true) %></h5>
       <h5><%= calculate_price(stocks.curr_price, false) %></h5>
