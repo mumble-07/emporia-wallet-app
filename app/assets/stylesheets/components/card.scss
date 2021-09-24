@@ -175,6 +175,26 @@
     // card item style for stock market (different # of cols)
     // can copy paste style below for other card-items with diff col #
     &.market{
+      >.market-section{
+        @include flex-col();
+        >img{
+          min-height: 7rem;
+          min-width: 7rem;
+          max-width: 7rem;
+          position: relative;
+        }
+        img:before {
+          content: ' ';
+          display: block;
+          position: absolute;
+          height: 7rem;
+          width: 7rem;
+          background-color: white;
+          background-image: url(broken-image.png);
+          background-size: contain;
+        }
+      }
+      
       >*{
         padding: 1rem 0;
         flex-grow: 1;
@@ -188,7 +208,7 @@
         justify-content: flex-start;
         >*{
           flex-grow: 1;
-          min-width: 33%;
+          min-width: 53%;
         }
         >*:not(.default){
           display: none;

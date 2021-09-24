@@ -8,7 +8,7 @@
       <%# data headers %>
       <div class="card-item headers market">
         <h5 class="default">Market</h5>
-        <h5 class="default">Change (24h)</h5>
+        <h5>Change (24h)</h5>
         <h5>Buy</h5>
         <h5>Sell</h5>
         <h5 class="default">Action</h5>
@@ -16,13 +16,15 @@
 
   <% @markets.each do |stocks| %>
       <div class="card-item market">
-      <h5 class="default"><%= stocks.market_symbol %></h5>
-      <h5 class="default"> -0.17%</h5>
-      <h5><%= calculate_price(stocks.curr_price, true) %></h5>
-      <h5><%= calculate_price(stocks.curr_price, false) %></h5>
-      <%= link_to "View", new_portfolio_path, class: "link-card-action default" %>
-      </div>
-      <% end %>
+        <div class="market-section default">
+          <img src=<%= stocks.logo_url %> />
+        </div>
+        <h5> -0.17%</h5>
+        <h5><%= calculate_price(stocks.curr_price, true) %></h5>
+        <h5><%= calculate_price(stocks.curr_price, false) %></h5>
+        <%= link_to "View", new_portfolio_path, class: "link-card-action default" %>
+        </div>
+        <% end %>
     </div>
   </section>
 </section>
