@@ -62,7 +62,10 @@ class AdminsController < ApplicationController
   def modify_user
     @trader = User.find(params[:id])
     @trader.update(params.require(:user).permit(:email, :full_name, :username))
-    if @trader.update(params.require(:user).permit(:email, :full_name, :username))
+    @wallet = @trader.wallet
+    @wallet.balance = params[:user][:balance]
+    @wallet.save
+    if @trader.update(params.require(:user).permit(:email, :full_name, :username)) && @wallet.save
       redirect_back fallback_location: admins_add_user_path, success: 'Successfully updated a trader'
     else
       redirect_back fallback_location: admins_add_user_path, danger: 'Kindly double check all information before submitting'

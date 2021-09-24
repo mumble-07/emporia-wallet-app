@@ -8,9 +8,14 @@
   <div class="modal-body">
     <%= form_with scope: :user, url: user_profile_path, method: :patch  do |f| %>
       <div class="field">
+        <h4>Email</h4>
         <%= f.email_field :email, autofocus: true, value: @trader.email %>
+        <h4>Fullname</h4>
         <%= f.text_field :full_name, autofocus: true, value: @trader.full_name %>
+        <h4>Username</h4>
         <%= f.text_field :username, autofocus: true, value: @trader.username %>
+        <h4>Balance</h4>
+        <%= f.number_field :balance, autofocus: true, value: @trader.wallet.balance %>
       </div>
       <div class="actions">
         <%= f.submit "Modify Account" %>

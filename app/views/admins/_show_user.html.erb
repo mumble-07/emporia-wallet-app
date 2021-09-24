@@ -14,6 +14,10 @@
           <h5><%= @trader.username %></h5>
         </div>
         <div class="container-data">
+          <h3>Fullname: </h3>
+          <h5><%= @trader.full_name %></h5>
+        </div>
+        <div class="container-data">
           <h3>Email: </h3>
           <h5><%= @trader.email %></h5>
         </div>
@@ -31,11 +35,11 @@
       <section class="card-modal-border">
         <div class="container-data">
           <h3>Wallet ID: </h3>
-          <h5>123</h5>
+          <h5><%= @trader.wallet.id %></h5>
         </div>
         <div class="container-data">
           <h3>Balance: </h3>
-          <h5>P 5,000.000</h5>
+          <h5><%= format_to_peso(@trader.wallet.balance) %></h5>
         </div>
       </section>
 
@@ -43,17 +47,17 @@
       <section class="card-modal-border">
         <div class="container-data">
           <h3>Total number of transactions: </h3>
-          <h5>123</h5>
+          <h5><%= @trader.transactions_logs.count %></h5>
         </div>
         <div class="container-data">
           <h3>Stocks in Portfolio: </h3>
-          <h5>23</h5>
+          <h5><%= @trader.portfolios.count %></h5>
         </div>
       </section>
     
     </div>
   </div>
   <div class="modal-footer">
-    <%= link_to 'Modify User', edit_user_profile_path(id: @trader.id), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#applicationModal', class: "link-nav-btn-primary-dark", id: "adminUserEdit" }  %>
+    <%= link_to 'Modify User', edit_user_profile_path(id: @trader.id), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#applicationModal', class: "link-nav-btn-primary-dark-admin", id: "adminUserEdit" }  %>
   </div>
 </div>

@@ -7,8 +7,8 @@
     <div class="card-container-table">
       <%# data headers %>
       <div class="card-item headers market">
-        <h5 class="">Market</h5>
-        <h5 class="default">Symbol</h5>
+        <h5 class="default">Market</h5>
+        <h5 class="default">Name</h5>
         <h5>Buy</h5>
         <h5>Sell</h5>
         <h5 class="default">Action</h5>
@@ -16,10 +16,10 @@
 
   <% @markets.each do |stocks| %>
       <div class="card-item market">
-      <div class="market-logo">
+      <div class="market-logo default">
         <img src=<%= stocks.logo_url %> />
       </div>
-      <h5 class="default" ><%= stocks.market_symbol %></h5>
+      <h5 class="default" ><%= stocks.name %></h5>
       <h5><%= calculate_price(stocks.curr_price, true) %></h5>
       <h5><%= calculate_price(stocks.curr_price, false) %></h5>
       <%= link_to "View", new_user_portfolio_path(user_id:current_user, market_id:stocks.id), class: "link-card-action default" %>
