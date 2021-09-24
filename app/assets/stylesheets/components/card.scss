@@ -63,9 +63,9 @@
   padding: 0 10vw;
   &.new-transaction{
     padding: 2vw;
-    // background-color: $color-primary-light;
+    background-color: white;
     box-shadow: none;
-    border: 2px solid $color-primary-light;
+    border: 1px solid $color-primary-light;
   }
   >.market-card{
     border-right: none !important;

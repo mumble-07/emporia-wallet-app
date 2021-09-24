@@ -27,5 +27,14 @@
   font-size: $font-size-navlinks;
   font-weight: 700;
   cursor: pointer;
-  color: $color-secondary;
+  color: $color-primary;
+
+  &:hover {
+    color:darken($color-primary-light,8%);
+    transition: all 0.3s ease;
+    // color: white;
+  }
+  &:active {
+    color:darken($color-primary-light,25%);
+  } 
 }
