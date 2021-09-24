@@ -21,7 +21,7 @@ module SeedsServices
       # Loop through each market to create data
       file_data.each do |data|
         begin
-          Market.create(market_symbol: data, curr_price: client.price(data), logo_url: "https://storage.googleapis.com/iex/api/logos/#{data}.png")
+          Market.create(market_symbol: data, name: client.company(data).company_name, curr_price: client.price(data), logo_url: "https://storage.googleapis.com/iex/api/logos/#{data}.png")
         rescue StandardError
           nil
         end
