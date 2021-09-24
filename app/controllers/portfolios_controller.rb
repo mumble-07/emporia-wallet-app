@@ -94,7 +94,7 @@ class PortfoliosController < ApplicationController
       @trader_wallet.save
       # destroy if 0 units left. Save if not
       @portfolio.units.zero? ? @portfolio.destroy : @portfolio.save
-      #create transaction
+      # create transaction
       create_transaction_log_sell
       # redirect
       redirect_to users_path, success: 'Stock successfully sold!'
