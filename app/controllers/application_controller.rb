@@ -27,4 +27,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[username full_name])
     devise_parameter_sanitizer.permit(:account_update, keys: %i[username full_name])
   end
+
+  def handle_error
+    redirect_to page_not_found_path
+  end
 end

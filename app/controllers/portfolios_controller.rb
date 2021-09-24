@@ -1,4 +1,5 @@
 class PortfoliosController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :handle_error
   before_action :authenticate_user!
   # before_action :portfolio
   def new
