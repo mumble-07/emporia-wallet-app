@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     #resque FE
     mount Resque::Server.new, at: '/admins/jobs'
   end
+  get '/page-not-found', action: :error404, controller: 'static_pages'
 
   root 'static_pages#home_page'
   get "*path" => 'static_pages#error404'
