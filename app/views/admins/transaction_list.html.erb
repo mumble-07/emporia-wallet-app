@@ -9,14 +9,14 @@
       <h1>No Transactions yet</h1>
       <% else %>
       <%# data headers %>
-      <div class="card-item headers logs">
+      <div class="card-item headers logs-admin">
         <h5 class="default">Date</h5>
         <h5 class="default">User</h5>
         <h5 class="default">Log Message</h5>
       </div>
 
       <% @transactions.each do |transaction| %>
-      <div class="card-item logs">
+      <div class="card-item logs-admin">
       <h5 class="default"><%= transaction.transaction_date %></h5>
       <h5 class="default"><%= transaction.user.email %></h5>
       <h5 class="default"><%= transaction_logs_parser(transaction) %></h5>

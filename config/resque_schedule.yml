@@ -1,6 +1,6 @@
 update_market_data_job:
   every: 
-    - '1min'
+    - '5min'
     - :first_in: '5s'
   class: "UpdateMarketDataJob"
   args:
