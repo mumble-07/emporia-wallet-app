@@ -20,7 +20,7 @@ module JobsServices
         begin
           @logger.info "Finding #{data} in DB."
           market = Market.find_by(market_symbol: data)
-          var_num = rand(-10...10) #random number between -10 to 10 to test calculations
+          var_num = rand(-10...10) # random number between -10 to 10 to test calculations
           @logger.info "Updating #{data} current price #{market.curr_price} to #{client.price(data) + var_num}. Variable added #{var_num} in DB."
           market.curr_price = client.price(data) + var_num
           market.save
