@@ -14,7 +14,7 @@ module SeedsServices
       @logger.info 'Fetching data from text file'
 
       # open text file for list of available markets in API
-      file = File.open('app/api/stock_lists/market_symbol_bkp.txt')
+      file = File.open('app/api/stock_lists/market_symbol_100.txt')
       file_data = file.readlines.map(&:chomp)
       @logger.info 'Fetching data from API...'
 
