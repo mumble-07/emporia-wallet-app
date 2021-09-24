@@ -273,7 +273,31 @@
         padding: 1rem 0;
         flex-grow: 1;
         min-width: 10%; //% depends on initial # of cols
-        max-width: 45%; //% depends on initial # of cols
+        max-width: 85%; //% depends on initial # of cols
+        line-height: 100%;
+        text-overflow: ellipsis;
+      }
+      @media only screen and (max-width: 650px) {
+        @include flex-row-start();
+        justify-content: flex-start;
+        >*{
+          flex-grow: 1;
+          min-width: 10%;
+        }
+        >*:not(.default){
+          display: none;
+        }
+      }
+    }
+    &.logs-admin{
+      >*{
+        max-width: 10%;
+      }
+      >*:last-child{
+        padding: 1rem 0;
+        flex-grow: 1;
+        min-width: 10%; //% depends on initial # of cols
+        max-width: 75%; //% depends on initial # of cols
         line-height: 100%;
         text-overflow: ellipsis;
       }
