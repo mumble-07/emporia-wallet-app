@@ -102,10 +102,10 @@ class PortfoliosController < ApplicationController
   end
 
   def create_transaction_log_buy(units_to_be_added)
-    TransactionsLog.create(user_id: current_user.id, transaction_type: params[:portfolio][:transaction_type], market_symbol: params[:portfolio][:market_symbol], hist_stock_price: params[:portfolio][:hist_price].to_f, amount: params[:portfolio][:amount].to_f, units: units_to_be_added, transaction_date: Date.current)
+    TransactionsLog.create(user_id: current_user.id, transaction_type: params[:portfolio][:transaction_type], market_symbol: params[:portfolio][:market_symbol], hist_stock_price: params[:portfolio][:hist_price].to_f, amount: params[:portfolio][:amount].to_f, units: units_to_be_added, transaction_date: DateTime.current)
   end
 
   def create_transaction_log_sell
-    TransactionsLog.create(user_id: current_user.id, transaction_type: params[:portfolio][:transaction_type], market_symbol: params[:portfolio][:market_symbol], hist_stock_price: params[:portfolio][:hist_price].to_f, amount: (params[:portfolio][:units].to_f * params[:portfolio][:hist_price].to_f), units: params[:portfolio][:units].to_f, transaction_date: Date.current)
+    TransactionsLog.create(user_id: current_user.id, transaction_type: params[:portfolio][:transaction_type], market_symbol: params[:portfolio][:market_symbol], hist_stock_price: params[:portfolio][:hist_price].to_f, amount: (params[:portfolio][:units].to_f * params[:portfolio][:hist_price].to_f), units: params[:portfolio][:units].to_f, transaction_date: DateTime.current)
   end
 end

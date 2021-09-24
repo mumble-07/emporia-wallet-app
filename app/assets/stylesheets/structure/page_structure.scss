@@ -40,8 +40,11 @@
 .container-static{
   width: 100%;
   @include flex-col-center();
-  justify-content: center;
   min-height: 70vh;
+
+  &.session-form{
+    justify-content: center;
+  }
   >.img-landing-page >svg{
     width: 70vw;
     max-height: 50vh;
