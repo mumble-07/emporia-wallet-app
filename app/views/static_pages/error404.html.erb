@@ -2,9 +2,17 @@
   <div class="img-landing-page">
     <%= inline_svg_tag('error_404.svg') %>
   </div>
+  <% unless request.fullpath.start_with?('/admins/') %>
   <div class="heading">
     <h1 class="header-landing">Oops! This page doesn't exist!</h1>
     <p class="subheader-landing">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
     <%= link_to 'Go back to homepage', root_path, class: 'landing-action' %>
   </div>
+  <% else %>
+  <div class="heading">
+    <h1 class="header-landing admin">Oops! This page doesn't exist!</h1>
+    <p class="subheader-landing admin">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+    <%= link_to 'Go back to homepage', root_path, class: 'landing-action' %>
+  </div>
+  <% end %>
 </section>

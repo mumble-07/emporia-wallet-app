@@ -73,6 +73,10 @@
       font-size: $font-size-header-landing;
       letter-spacing: 3px;
       color: $color-black;
+
+      &.admin{
+        color: white;
+      }
     }
 
     >.subheader-landing{
@@ -80,6 +84,9 @@
       font-family: 'Montserrat';
       font-size: $font-size-subheader-landing;
       color: $color-black;
+      &.admin{
+        color: white;
+      }
     }
 
     >.admin-header-landing{
