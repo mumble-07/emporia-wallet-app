@@ -10,36 +10,30 @@
       </div>
       <div>
         <h3><%= format_to_peso(get_total_profit_loss(@portfolios)) %></h3>
-        <h3>P/L</h3>
-      </div>
-      <div>
-        <h3><%= format_to_peso(@wallet.balance + get_total_profit_loss(@portfolios)) %></h3>
-        <h3>Value</h3>
+        <h3>Total Revenue</h3>
       </div>
     </div>
     
     <div class="card-container-table">
       <%# data headers %>
       <div class="card-item user headers">
-        <h5>Type</h5>
-        <h5 class="default">Market</h5>
+        <h5 class="market-data"></h5>
+        <h5 class="market-data default">Symbol</h5>
+        <h5 class="">Market</h5>
         <h5 class="default">Units</h5>
-        <h5>Invested</h5>
-        <h5>P/L (%)</h5>
-        <h5>P/L (Php)</h5>
-        <h5>Total</h5>
+        <h5>Total Revenue</h5>
         <h5 class="default">Action</h5>
       </div>
 
       <% @portfolios.each do |portfolio| %>
       <div class="card-item user">
-        <h5><%= portfolio.transaction_type%></h5>
-        <h5 class="default"><%= portfolio.market_symbol %></h5>
+        <div class="market-logo market-data">
+          <img src=<%= get_logo_url(portfolio.market_symbol) %> />
+        </div>
+        <h5 class="default market-data"><%= portfolio.market_symbol %></h5>
+        <h5 class="" ><%= get_market_name(portfolio.market_symbol) %></h5>
         <h5 class="default"><%= portfolio.units.round(4) %></h5>
-        <h5><%= format_to_peso(portfolio.amount.round(2))%></h5>
-        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_pct].round(2) %></h5>
-        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_peso].round(2) %></h5>
-        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_gross_val].round(2) %></h5>
+        <h5><%= format_to_peso(get_profit_or_loss(portfolio)[:profit_or_loss_gross_val])%></h5>
         <%= link_to "View", new_user_portfolio_path(user_id:current_user, market_id:portfolio.market_id), class: "link-card-action default" %>
       </div>
       <% end %>
