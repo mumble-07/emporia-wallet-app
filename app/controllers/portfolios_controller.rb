@@ -60,7 +60,7 @@ class PortfoliosController < ApplicationController
     if trader_wallet.balance.positive? && portfolio.save
       trader_wallet.save
       # create transaction
-      create_transaction_log(units_to_be_added)
+      create_transaction_log_buy(units_to_be_added)
       redirect_to users_path, success: 'Successfully bought stocks'
     else
       redirect_back fallback_location: users_path, danger: 'Kindly double check all information before submitting. Also please check if balance is sufficient.'
@@ -71,7 +71,7 @@ class PortfoliosController < ApplicationController
     if trader_wallet.balance.positive? && portfolio.save
       trader_wallet.save
       # create transaction
-      create_transaction_log(units_to_be_added)
+      create_transaction_log_buy(units_to_be_added)
       redirect_to users_path, success: 'Successfully bought stocks'
 
       # id: integer, user_id: integer, portfolio_id: integer, transaction_type: string, market_symbol: string, hist_stock_price: float, amount: float, units: float, transaction_date: datetime, created_at: datetime, updated_at: datetime
@@ -94,12 +94,18 @@ class PortfoliosController < ApplicationController
       @trader_wallet.save
       # destroy if 0 units left. Save if not
       @portfolio.units.zero? ? @portfolio.destroy : @portfolio.save
+      #create transaction
+      create_transaction_log_sell
       # redirect
       redirect_to users_path, success: 'Stock successfully sold!'
     end
   end
 
-  def create_transaction_log(units_to_be_added)
+  def create_transaction_log_buy(units_to_be_added)
     TransactionsLog.create(user_id: current_user.id, transaction_type: params[:portfolio][:transaction_type], market_symbol: params[:portfolio][:market_symbol], hist_stock_price: params[:portfolio][:hist_price].to_f, amount: params[:portfolio][:amount].to_f, units: units_to_be_added, transaction_date: Date.current)
+  end
+
+  def create_transaction_log_sell
+    TransactionsLog.create(user_id: current_user.id, transaction_type: params[:portfolio][:transaction_type], market_symbol: params[:portfolio][:market_symbol], hist_stock_price: params[:portfolio][:hist_price].to_f, amount: (params[:portfolio][:units].to_f * params[:portfolio][:hist_price].to_f), units: params[:portfolio][:units].to_f, transaction_date: Date.current)
   end
 end
