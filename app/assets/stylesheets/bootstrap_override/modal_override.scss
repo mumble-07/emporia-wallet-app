@@ -10,11 +10,20 @@
 
 .modal-body{
   @include flex-col-center();
+  >p{
+    font-size: $font-size-navlinks-mobile;
+  }
 }
 
 .modal-header{
   background-color: $color-primary;
   >button{
     color: white;
+  }
+}
+
+.modal-footer{
+  >button{
+    font-size: $font-size-navlinks-mobile;
   }
 }

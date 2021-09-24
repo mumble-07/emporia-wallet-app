@@ -16,7 +16,7 @@
 
       <% @transactions.each do |transaction| %>
       <div class="card-item logs">
-      <h5 class="default"><%= transaction.transaction_date %></h5>
+      <h5 class="default"><%= transaction.transaction_date.strftime("%b %d, %Y, %H:%M:%S") %> SGT</h5>
       <h5 class="default"><%= transaction_logs_parser(transaction) %></h5>
       </div>
       <% end %>

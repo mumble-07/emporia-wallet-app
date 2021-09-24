@@ -1,11 +1,10 @@
 <section class="container-static">
   <section class="card-container">
-
-    <div class="card-header-name market-show">
-      <img src=<%= @market.logo_url %> />
-      <h1><%=@market.name%></h1>
-    </div>
-    <div class="card-container-stats">
+    <div class="card-container-stats new-transaction">
+      <div class="market-card">
+        <img src=<%= @market.logo_url %> />
+        <h1><%=@market.name%></h1>
+      </div>
       <div>
         <h1><%= number_to_currency(@buy_value, unit: 'PHP ') %></h1>
         <h5>Buy</h5>
@@ -15,7 +14,9 @@
         <h5>Sell</h5>
       </div>
     </div>
-
+    <div class="card-header-name">
+      <h1>Account Information</h1>
+    </div>
     <div class="card-container-stats">
       <div>
         <h3><%= format_to_peso(@wallet.balance) %></h3>
@@ -38,7 +39,7 @@
             <%= f.number_field :market_id, value: @market.id, type: :hidden %>
           </div>
           <div class="actions">
-            <%= f.submit "Buy", class: 'transaction-buy', data: { confirm: "PLEASE CONFIRM BUY" } %>
+            <%= f.submit "Buy", class: 'transaction-buy', data: { confirm: "Kindly confirm buy transaction" } %>
           </div>
         <% end %>
 
@@ -52,7 +53,7 @@
             <%= f.number_field :market_id, value: @market.id, type: :hidden %>
           </div>
           <div class="actions">
-            <%= f.submit "Sell", class: 'transaction-sell', data: { confirm: "PLEASE CONFIRM SELL" } %>
+            <%= f.submit "Sell", class: 'transaction-sell', data: { confirm: "Kindly confirm sell transaction" } %>
           </div>
         <% end %>
       </div>

@@ -23,11 +23,11 @@
         </div>
         <div class="container-data">
           <h3>Account Created: </h3>
-          <h5><%= @trader.created_at %></h5>
+          <h5><%= @trader.created_at.strftime("%b %d, %Y, %H:%M:%S") %> SGT</h5>
         </div>
         <div class="container-data">
           <h3>Last Updated: </h3>
-          <h5><%= @trader.updated_at %></h5>
+          <h5><%= @trader.updated_at.strftime("%b %d, %Y, %H:%M:%S")  %> SGT</h5>
         </div>
       </section>
 
