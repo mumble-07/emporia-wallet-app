@@ -247,17 +247,46 @@
     }
     //end of sample card-item table template for diff col #
     &.user{
+      >.market-logo{
+        @include flex-col();
+        
+        >img{
+          min-width: 8rem;
+          max-width: 8rem;
+          min-height: 8rem;
+          max-height: 8rem;
+          position: relative;
+        }
+        img:before {
+          content: ' ';
+          display: block;
+          position: absolute;
+          height: 8rem;
+          width: 8rem;
+          background-color: white;
+          background-image: url(broken-image.png);
+          background-size: contain;
+        }
+      }
+      >.market-data{
+        min-width: 10vw;
+        max-width: 10vw;
+      }
       >*{
         padding: 1rem 0;
         flex-grow: 1;
-        min-width: 11%; //% depends on initial # of cols
-        max-width: 12%; //% depends on initial # of cols
+        min-width: 20%; //% depends on initial # of cols
+        max-width: 21%; //% depends on initial # of cols
         line-height: 100%;
         text-overflow: ellipsis;
       }
       @media only screen and (max-width: 650px) {
         @include flex-row-start();
         justify-content: flex-start;
+        >.market-data{
+          min-width: none;
+          max-width: none;
+        }
         >*{
           flex-grow: 1;
           min-width: 33%;

@@ -8,7 +8,8 @@ module UsersHelper
     # - stock price it was bought
     # - current stock price as of the moment
     # - then calculate the difference using the units and the prices (historical and current)
-    current_stock_price = mkt_value_with_original(get_curr_stock_price(market.market_symbol)) # curr stock price will be the original price (-5% charge)
+    # since we are calcuilating already the revenue, we will calculate it using the price of the application when selling - which is -5% of the original
+    current_stock_price = mkt_value_with_interest('sell', get_curr_stock_price(market.market_symbol))
     profit_or_loss_gross_val = market.units * current_stock_price
     profit_or_loss_peso = profit_or_loss_gross_val - market.amount
     profit_or_loss_pct = ((profit_or_loss_gross_val - market.amount) / market.amount)
@@ -18,8 +19,11 @@ module UsersHelper
 
   def get_total_profit_loss(portfolios)
     total_profit = 0
+
     portfolios.each do |portfolio|
-      total_profit += get_profit_or_loss(portfolio)[:profit_or_loss_peso]
+      # since we are calcuilating already the revenue, we will calculate it using the price of the application when selling - which is -5% of the original
+      current_stock_price = mkt_value_with_interest('sell', get_curr_stock_price(portfolio.market_symbol))
+      total_profit += portfolio.units * current_stock_price
     end
     total_profit.round(3)
   end

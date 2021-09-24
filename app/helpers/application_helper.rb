@@ -25,4 +25,12 @@ module ApplicationHelper
   def mkt_value_with_original(mkt_current_price)
     mkt_current_price * 50.06
   end
+
+  def get_logo_url(sym)
+    Market.find_by(market_symbol: sym).logo_url
+  end
+
+  def get_market_name(sym)
+    Market.find_by(market_symbol: sym).name
+  end
 end
