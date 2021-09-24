@@ -15,15 +15,19 @@
     justify-content: flex-start;
     >img{
       min-width: 8rem;
+      max-width: 8rem;
       min-height: 8rem;
+      max-height: 8rem;
       position: relative;
     }
     img:before {
       content: ' ';
       display: block;
       position: absolute;
-      height: 8rem;
-      width: 8rem;
+      min-width: 8rem;
+      max-width: 8rem;
+      min-height: 8rem;
+      max-height: 8rem;
       background-color: white;
       background-image: url(broken-image.png);
       background-size: contain;
@@ -201,7 +205,9 @@
         
         >img{
           min-width: 8rem;
+          max-width: 8rem;
           min-height: 8rem;
+          max-height: 8rem;
           position: relative;
         }
         img:before {
@@ -213,7 +219,7 @@
           background-color: white;
           background-image: url(broken-image.png);
           background-size: contain;
-      }
+        }
       }
       
       >*{
@@ -229,7 +235,10 @@
         justify-content: flex-start;
         >*{
           flex-grow: 1;
-          min-width: 53%;
+          min-width: 33%;
+        }
+        >*:last-child{
+          margin-left: 2rem;
         }
         >*:not(.default){
           display: none;

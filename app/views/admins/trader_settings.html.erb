@@ -2,7 +2,7 @@
   <section class="card-container">
     <div class="card-header-name">
       <h1>Trader List</h1>
-      <%= link_to 'Create Trader', admins_add_user_path, {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#applicationModal', class: "link-nav-btn-primary-dark" } %>
+      <%= link_to 'Create Trader', admins_add_user_path, {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#applicationModal', class: "link-nav-btn-primary-dark-admin" } %>
     </div>
   
     <div class="card-container-table">
@@ -13,6 +13,7 @@
       <div class="card-item headers market">
         <h5 class="default">ID</h5>
         <h5 class="default">Username</h5>
+        <h5>Fullname</h5>
         <h5>Email</h5>
         <h5 class="default">Action</h5>
       </div>
@@ -22,8 +23,9 @@
       <div class="card-item market">
         <h5 class="default"><%= trader.id %></h5>
         <h5 class="default"><%= trader.username %></h5>
+        <h5><%= trader.full_name %></h5>
         <h5><%= trader.email %></h5>
-        <%= link_to "View", user_profile_path(trader.id), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#showModal', class: "link-nav-dark" }%>
+        <%= link_to "View", user_profile_path(trader.id), {remote: true, 'data-toggle' =>  "modal", 'data-target' => '#showModal', class: "link-nav-dark default" }%>
       </div>
       <% end %>
       <% end %>
