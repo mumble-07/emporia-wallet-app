@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :transactions_logs, only: [:index]
     # get '/users/transaction-logs', to: 'transactions_logs#index' #list view of users
     resources :markets, only: [:index]
-    # root 'static_pages#home_page'
+    root to: 'users#index', as: :authenticated_root
   end
 
   authenticated :admin do

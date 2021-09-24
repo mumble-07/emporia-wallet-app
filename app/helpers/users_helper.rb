@@ -10,9 +10,17 @@ module UsersHelper
     # - then calculate the difference using the units and the prices (historical and current)
     current_stock_price = mkt_value_with_original(get_curr_stock_price(market.market_symbol)) # curr stock price will be the original price (-5% charge)
     profit_or_loss_gross_val = market.units * current_stock_price
-    profit_or_loss_peso = market.amount - profit_or_loss_gross_val
-    profit_or_loss_pct = ((market.amount - profit_or_loss_gross_val) / market.amount)
+    profit_or_loss_peso = profit_or_loss_gross_val - market.amount
+    profit_or_loss_pct = ((profit_or_loss_gross_val - market.amount) / market.amount)
 
     { profit_or_loss_pct: profit_or_loss_pct, profit_or_loss_peso: profit_or_loss_peso, profit_or_loss_gross_val: profit_or_loss_gross_val } # return a hash
+  end
+
+  def get_total_profit_loss(portfolios)
+    total_profit = 0
+    portfolios.each do |portfolio|
+      total_profit += get_profit_or_loss(portfolio)[:profit_or_loss_peso]
+    end
+    total_profit.round(3)
   end
 end
