@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     put '/admins/trader-settings/:id', to: 'admins#modify_user'
     patch '/admins/trader-settings/:id', to: 'admins#modify_user'
     get '/admins/trader-settings/:id/edit', to: 'admins#edit_user', as: :edit_user_profile
+    get '/admins/transaction-list', to: 'admins#transaction_list', as: :user_transactions
     #resque FE
     mount Resque::Server.new, at: '/admins/jobs'
   end

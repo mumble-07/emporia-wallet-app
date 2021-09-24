@@ -20,6 +20,10 @@ class AdminsController < ApplicationController
     end
   end
 
+  def transaction_list
+    @transactions = TransactionsLog.all
+  end
+
   def add_user
     @trader = User.new
     respond_to do |format|
