@@ -35,11 +35,11 @@
       <div class="card-item user">
         <h5><%= portfolio.transaction_type%></h5>
         <h5 class="default"><%= portfolio.market_symbol %></h5>
-        <h5 class="default"><%= portfolio.units %></h5>
-        <h5><%= format_to_peso(portfolio.amount)%></h5>
-        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_pct] %></h5>
-        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_peso] %></h5>
-        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_gross_val] %></h5>
+        <h5 class="default"><%= portfolio.units.round(4) %></h5>
+        <h5><%= format_to_peso(portfolio.amount.round(2))%></h5>
+        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_pct].round(2) %></h5>
+        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_peso].round(2) %></h5>
+        <h5><%= get_profit_or_loss(portfolio)[:profit_or_loss_gross_val].round(2) %></h5>
         <%= link_to "View", new_user_portfolio_path(user_id:current_user, market_id:portfolio.market_id), class: "link-card-action default" %>
       </div>
       <% end %>
