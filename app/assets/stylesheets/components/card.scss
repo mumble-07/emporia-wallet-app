@@ -61,11 +61,42 @@
   box-shadow: 0px 1px 2px #5f5f5f40;
   margin-bottom: 3rem;
   padding: 0 10vw;
-  >*{
+  &.new-transaction{
+    padding: 2vw;
+    // background-color: $color-primary-light;
+    box-shadow: none;
+    border: 2px solid $color-primary-light;
+  }
+  >.market-card{
+    border-right: none !important;
+    @include flex-row();
+    
+    >img{
+      min-width: 8rem;
+      max-width: 8rem;
+      min-height: 8rem;
+      max-height: 8rem;
+      position: relative;
+    }
+    img:before {
+      content: ' ';
+      display: block;
+      position: absolute;
+      height: 8rem;
+      width: 8rem;
+      background-color: white;
+      background-image: url(broken-image.png);
+      background-size: contain;
+    }
+    >h1{
+      margin: 0 1.4rem;
+    }
+  }
+  >*:not(.market-card){
     flex-grow: 1;
     @include flex-col-center();
     >h1{
-      font-size: $font-size-header;
+      font-size: $font-size-subheader;
       font-weight: 700;
     }
 
@@ -105,7 +136,7 @@
   @media only screen and (max-width: 970px) {
     @include flex-col();
     padding: 0 4vw;
-    >*{
+    >*:not(.market-card){
       width: 100%;
       @include flex-row();
       flex-direction: row-reverse;
