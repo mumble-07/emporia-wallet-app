@@ -17,9 +17,9 @@
     <div class="card-container-table">
       <%# data headers %>
       <div class="card-item user headers">
+        <h5 class="market-logo market-data">Market Name</h5>
         <h5 class="market-data"></h5>
-        <h5 class="market-data default">Symbol</h5>
-        <h5 class="">Market</h5>
+        <h5 class="default">Symbol</h5>
         <h5 class="default">Units</h5>
         <h5>Total Revenue</h5>
         <h5 class="default">Action</h5>
@@ -30,8 +30,8 @@
         <div class="market-logo market-data">
           <img src=<%= get_logo_url(portfolio.market_symbol) %> />
         </div>
-        <h5 class="default market-data"><%= portfolio.market_symbol %></h5>
         <h5 class="" ><%= get_market_name(portfolio.market_symbol) %></h5>
+        <h5 class="default market-data"><%= portfolio.market_symbol %></h5>
         <h5 class="default"><%= portfolio.units.round(4) %></h5>
         <h5><%= format_to_peso(get_profit_or_loss(portfolio)[:profit_or_loss_gross_val])%></h5>
         <%= link_to "View", new_user_portfolio_path(user_id:current_user, market_id:portfolio.market_id), class: "link-card-action default" %>
