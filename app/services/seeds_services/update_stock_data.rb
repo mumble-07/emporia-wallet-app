@@ -15,14 +15,13 @@ module SeedsServices
       file_data = file.readlines.map(&:chomp)
       @logger.info 'Fetching data from API...'
 
-      # Loop through each market to create data
+      # Loop through each market to update data
       file_data.each do |data|
         begin
           @logger.info "Finding #{data} in DB."
           market = Market.find_by(market_symbol: data)
-          var_num = rand(0.95...1.23).round(5) # random number between -10 to 10 to test calculations
-          @logger.info "Updating #{data} current price #{market.curr_price} to #{client.price(data) * var_num}. Variable added #{var_num} in DB."
-          market.curr_price = client.price(data) * var_num
+          @logger.info "Updating #{data} current price #{market.curr_price} to #{client.price(data)}."
+          market.curr_price = client.price(data)
           market.save
         rescue StandardError
           nil
