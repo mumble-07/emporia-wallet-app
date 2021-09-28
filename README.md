@@ -1,4 +1,4 @@
-# Emporia Wallet App👋
+# Emporia Wallet App
 
 The best trading platform for you!
 
@@ -56,6 +56,9 @@ password: test12345 (only 1 admin)
 ![Emporia Wallet (16)](https://user-images.githubusercontent.com/73781775/135029127-8f5ee42b-970b-4294-8894-a3a6bb4cabb3.jpg)
 
 ![Emporia Wallet (17)](https://user-images.githubusercontent.com/73781775/135029208-481d5595-6a4e-41cb-b015-22a6953f2bac.jpg)
+
+![Emporia Wallet (3)](https://user-images.githubusercontent.com/73781775/135029345-58f5e348-1710-4acf-a912-4d55db03ee5b.jpg)
+
 
 #### Setup
 
