@@ -3,17 +3,17 @@
 The best trading platform for you!
 
 #### See it live! 
-```
-TRADER - https://emporia-wallet-app.herokuapp.com/
-Credentials: 
-email: test_user+0@test.com 
-password: test12345 (of all seeds sample user)
 
-ADMIN - https://emporia-wallet-app.herokuapp.com/admins/sign_in
-Credentials: 
-email: admin@admin.com 
-password: test12345 (only 1 admin)
-```
+##### TRADER - https://emporia-wallet-app.herokuapp.com/
+###### Credentials: 
+###### email: test_user+0@test.com 
+###### password: test12345 (of all seeds sample user)
+
+##### ADMIN - https://emporia-wallet-app.herokuapp.com/admins/sign_in
+###### Credentials: 
+###### mail: admin@admin.com 
+###### password: test12345 (only 1 admin)
+
 #### Version
 
 ```
